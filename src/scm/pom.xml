@@ -1,0 +1,72 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>sable.jasmin</groupId>
+    <artifactId>scm</artifactId>
+    <version>1.1</version>
+
+    <parent>
+        <groupId>sable.jasmin</groupId>
+        <artifactId>parent</artifactId>
+        <version>2.6.0-SNAPSHOT</version>
+        <relativePath>../parent/pom.xml</relativePath>
+    </parent>
+    
+    <dependencies>
+        <dependency>
+            <groupId>sable.jasmin</groupId>
+            <artifactId>jas</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>sable.jasmin</groupId>
+            <artifactId>autogen</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>generate</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                    <configuration>
+                        <classpathScope>test</classpathScope>
+                        <mainClass>autogen</mainClass>
+                        <arguments>
+                            <argument>${project.build.directory}/generated-sources/autogen/scm</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>addAutogenSourceFolder</id>
+                    <goals>
+                        <goal>add-source</goal>
+                    </goals>
+                    <phase>process-sources</phase>
+                    <configuration>
+                        <sources>
+                            <source>${project.build.directory}/generated-sources/autogen</source>
+                        </sources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        </plugins>
+    </build>
+ </project>
