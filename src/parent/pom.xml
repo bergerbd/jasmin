@@ -22,7 +22,7 @@
     <repositories>
         <repository>
             <id>local-repository</id>
-            <url>file://${basedir}/../../repository</url>
+            <url>https://raw.github.com/bergerbd/soot-dependencies/master/</url>
         </repository>
     </repositories>
 </project>
